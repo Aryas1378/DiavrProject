@@ -20,9 +20,9 @@ class AdResource extends JsonResource
             'name' =>$this->name,
             'title' => $this->title,
             'description' => $this->description,
-//            'category' => AdResource::collection($this->category),
+            'category' => CategoryResource::make($this->whenLoaded('category')),
 //            'attribute' => AdResource::collection($this->attribute),
-            'city' => new AdResource($this->city),
+            'city' => CityResource::make($this->city),
         ];
 
     }

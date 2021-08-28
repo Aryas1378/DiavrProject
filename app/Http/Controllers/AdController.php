@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\AdStoreRequest;
 use App\Http\Requests\AdUpdateRequest;
 use App\Http\Resources\AdResource;
@@ -13,19 +14,14 @@ class AdController extends Controller
     public function index()
     {
 
-//        return response()->json([
-//            'data' => Ad::query()->with('category', 'attributeValues.attribute', 'city');
-//        ]);
-
-//        return $this->success(AdResource::collection(Ad::query()->with('city')));
-//        return $this->success(new AdResource(Ad::query()->with('city')));
-        return $this->success(new AdResource(Ad::query()->with('city')));
+        $ads = Ad::query()->with('city')->get();
+        return $this->success(AdResource::collection($ads));
 
     }
 
     public function show(Ad $ad)
     {
-        return $ad->load('category', 'attributeValues.attribute');
+        return $this->success($ad->load('category', 'attributeValues.attribute'));
     }
 
     public function store(AdStoreRequest $request)
@@ -44,12 +40,10 @@ class AdController extends Controller
         } catch (\Throwable $exception) {
             DB::rollBack();
 
-            dd($exception);
+            $this->error($exception);
         }
 
-        return response()->json([
-            'data' => "ad created",
-        ]);
+        return $this->success("ad is created");
     }
 
     public function update(AdUpdateRequest $request, Ad $ad)
@@ -69,7 +63,7 @@ class AdController extends Controller
 
             DB::commit();
 
-            return $attributes;
+            return $this->success("attribute is updated");
 
         } catch (\Throwable $exception) {
 
@@ -88,9 +82,6 @@ class AdController extends Controller
 
         $ad->delete();
 
-        return [
-            "error" => false,
-            "message" => "ad was deleted!"
-        ];
+        return $this->success("ad was deleted");
     }
 }

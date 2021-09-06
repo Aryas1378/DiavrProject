@@ -14,14 +14,23 @@ class AdController extends Controller
     public function index()
     {
 
-        $ads = Ad::query()->with('city')->get();
+        $ads = Ad::query()->with('city', 'attributeValues.attribute', 'category')->where('auth', 'yes')->get();
+
         return $this->success(AdResource::collection($ads));
 
     }
 
     public function show(Ad $ad)
     {
-        return $this->success($ad->load('category', 'attributeValues.attribute'));
+
+        if ($ad->auth == 'yes')
+        {
+            $ad = $ad->load('category', 'attributeValues.attribute', 'city');
+            return $this->success($ad->load('category', 'attributeValues.attribute', 'city'));
+        }
+
+        return $this->error("This as is not valid");
+
     }
 
     public function store(AdStoreRequest $request)
@@ -40,7 +49,7 @@ class AdController extends Controller
         } catch (\Throwable $exception) {
             DB::rollBack();
 
-            $this->error($exception);
+            $this->error($exception->getMessage());
         }
 
         return $this->success("ad is created");
@@ -68,7 +77,7 @@ class AdController extends Controller
         } catch (\Throwable $exception) {
 
             DB::rollBack();
-            dd($exception);
+            $this->error($exception->getMessage());
 
         }
 

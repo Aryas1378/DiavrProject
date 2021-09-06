@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
-    public function ad()
-    {
-        return $this->hasOne(Ad::class, 'city_id');
-    }
+    use HasFactory;
+    //
 }

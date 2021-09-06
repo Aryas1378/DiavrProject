@@ -1,11 +1,19 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    use HasFactory;
+
     public $timestamps = false;
+
+    protected $fillable = [
+        'name',
+        'parent_id',
+    ];
 
     public function parent()
     {
@@ -22,14 +30,11 @@ class Category extends Model
         return $this->belongsToMany(Attribute::class, 'attribute_category');
     }
 
-    public function attributeValues()
+    public function ads()
     {
-        return $this->hasMany(AttributeValue::class, 'ad_id');
+        return $this->hasMany(Ad::class, 'category_id');
     }
 
-    public function city()
-    {
-        return $this->belongsTo(City::class, 'city_id');
-    }
+
 
 }

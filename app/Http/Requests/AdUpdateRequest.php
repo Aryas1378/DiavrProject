@@ -25,11 +25,7 @@ class AdUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required'],
-            'category_id' => ['required'],
-            'attributes' => ['array'],
-            'attributes.*.attribute_id' => ['required', 'numeric', Rule::exists('attributes', 'id')],
-            'attributes.*.value' => ['required']
+            'status_id' => ['required'],
         ];
     }
 }

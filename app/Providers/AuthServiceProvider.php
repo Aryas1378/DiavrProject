@@ -2,8 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models\Ad;
+use App\Models\Attribute;
+use App\Models\AttributeDefaultValue;
+use App\Models\Category;
+use App\Policies\AdPolicy;
+use App\Policies\AttributeDefaultValuePolicy;
+use App\Policies\AttributePolicy;
+use App\Policies\CategoryPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,6 +21,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Category::class => CategoryPolicy::class,
+        Attribute::class => AttributePolicy::class,
+        AttributeDefaultValue::class => AttributeDefaultValuePolicy::class,
+        Ad::class => AdPolicy::class,
     ];
 
     /**
@@ -25,6 +36,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+
     }
 }

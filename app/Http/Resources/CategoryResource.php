@@ -17,8 +17,11 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-//            'children' => CategoryResource::collection($this->children),
-//            'parent' => new CategoryResource($this->parent),
+            'children' => CategoryResource::collection($this->whenLoaded('children')),
+            'city' => CityResource::make($this->whenLoaded('city')),
+            'attributes' => AttributeResource::collection($this->whenLoaded('attributes')),
+            'parent' => CategoryResource::make($this->whenLoaded('parent')),
+            'ads' => AdResource::collection($this->whenLoaded('ads')),
         ];
     }
 }

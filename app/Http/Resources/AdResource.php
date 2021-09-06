@@ -17,12 +17,13 @@ class AdResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'name' =>$this->name,
             'title' => $this->title,
-            'description' => $this->description,
+            'ad_description' => $this->description,
+            'status' => StatusResource::make($this->whenLoaded('status')),
+            'status_description' => $this->status_description,
             'category' => CategoryResource::make($this->whenLoaded('category')),
-//            'attribute' => AdResource::collection($this->attribute),
-            'city' => CityResource::make($this->city),
+            'attributes' => AttributeResource::collection($this->whenLoaded('attributes')),
+            'city' => CityResource::make($this->whenLoaded('city')),
         ];
 
     }

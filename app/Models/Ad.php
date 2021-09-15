@@ -13,6 +13,7 @@ class Ad extends Model
         'title',
         'description',
         'city_id',
+        'user_id',
         'category_id',
         'status_id',
         'status_description',
@@ -36,6 +37,21 @@ class Ad extends Model
     public function status()
     {
         return $this->belongsTo(StatusValue::class, 'status_id');
+    }
+
+    public function pictures()
+    {
+        return $this->hasMany(Picture::class, 'ad_id');
+    }
+
+    public function channels()
+    {
+        return $this->hasMany(Channel::class, 'ad_id');
+    }
+
+    public function mutualChats()
+    {
+        return $this->hasMany(MutualChat::class, 'ad_id');
     }
 
 }

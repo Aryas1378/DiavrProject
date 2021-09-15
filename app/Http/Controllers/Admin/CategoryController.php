@@ -22,15 +22,14 @@ class CategoryController extends Controller
 
         $categories = Category::query()->with('parent', 'ads', 'children', 'attributes')->get();
         return $this->success(CategoryResource::collection($categories));
+
     }
 
     public function show(Category $category)
     {
-
         return $this->success(
             new CategoryResource($category->load('children', 'parent', 'attributes', 'attributes.defaultValues'))
         );
-
     }
 
     public function store(CategoryStroreRequest $request)
@@ -43,8 +42,8 @@ class CategoryController extends Controller
     {
         DB::beginTransaction();
         try {
-            $category->update($request->only('name', 'parent_id'));
-
+            $category->delete();
+            Category::query()->create($request->only('name', 'parent_id'));
             DB::commit();
 
             return $this->success(new CategoryResource($category));

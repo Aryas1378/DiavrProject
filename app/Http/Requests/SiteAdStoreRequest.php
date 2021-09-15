@@ -27,7 +27,10 @@ class SiteAdStoreRequest extends FormRequest
             'title' => ['required'],
             'city_id' => ['required'],
             'category_id' => ['required'],
-            'attributes' => ['required'],
+            'attributes' => ['array'],
+            'attributes.*.attribute_id' => ['required', 'exists:attributes,id'],
+            'attributes.*.value' => ['required']
+
         ];
     }
 }

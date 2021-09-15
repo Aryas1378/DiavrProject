@@ -7,16 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
+    use HasFactory;
 
-    Use HasFactory;
-    protected $fillable =
-        [
-            'name'
-        ];
+    protected $fillable = [
+        'name'
+    ];
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class,'attribute_category');
+        return $this->belongsToMany(Category::class, 'attribute_category');
     }
 
 //    public function ads()

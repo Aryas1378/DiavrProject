@@ -53,6 +53,7 @@ class AttributeDefaultValuePolicy
      */
     public function update(User $user, AttributeDefaultValue $attributeDefaultValue)
     {
+
         return auth()->user()->hasRole('admin');
     }
 
@@ -68,27 +69,4 @@ class AttributeDefaultValuePolicy
         return auth()->user()->hasRole('admin');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\AttributeDefaultValue  $attributeDefaultValue
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, AttributeDefaultValue $attributeDefaultValue)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\AttributeDefaultValue  $attributeDefaultValue
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, AttributeDefaultValue $attributeDefaultValue)
-    {
-        //
-    }
 }

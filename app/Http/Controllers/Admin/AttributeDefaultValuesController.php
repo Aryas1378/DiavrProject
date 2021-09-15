@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AttributeDefaultValuesStoreRequest;
+use App\Http\Requests\AttributeDefaultValuesUpdateRequest;
 use App\Http\Resources\AttributeDefaultValueResource;
+use App\Models\Attribute;
 use App\Models\AttributeDefaultValue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,30 +28,23 @@ class AttributeDefaultValuesController extends Controller
     {
         DB::beginTransaction();
         try {
-
-            $attribute_default_value = AttributeDefaultValue::query()
-                ->create($request
-                ->only('attribute_id', 'values'));
+            foreach ($request->values as $value) {
+                AttributeDefaultValue::create([
+                    'attribute_id' => $request->attribute_id,
+                    'value' => $value,
+                ]);
+            }
             DB::commit();
-            return $this->success(new AttributeDefaultValueResource($attribute_default_value));
-
-        }catch (\Throwable $exception){
+        } catch (\Throwable $exception) {
             DB::rollBack();
             return $exception->getMessage();
         }
     }
 
-    public function update(AttributeDefaultValuesStoreRequest $request, AttributeDefaultValue $attributeDefaultValue)
+    public function update(AttributeDefaultValuesUpdateRequest $request, AttributeDefaultValue $attributeDefaultValue)
     {
-        DB::beginTransaction();
-        try {
-            $attributeDefaultValue->update($request->only('attribute_id', 'value'));
-            DB::commit();
-            return $this->success("Done!");
-        }catch (\Throwable $exception){
-            DB::rollBack();
-            return $exception->getMessage();
-        }
+            $attributeDefaultValue->update($request->only('value'));
+            return $this->success("done");
     }
 
     public function destroy(AttributeDefaultValue $attributeDefaultValue)
@@ -59,7 +54,7 @@ class AttributeDefaultValuesController extends Controller
             $attributeDefaultValue->delete();
             DB::commit();
             return $this->success("Done!");
-        }catch (\Throwable $exception){
+        } catch (\Throwable $exception) {
             DB::rollBack();
         }
     }

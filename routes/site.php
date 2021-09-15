@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Site\AdController;
-//use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Site\CategoryAttributeController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('/site')->group(function () {
+Route::prefix('/site')->middleware('auth:sanctum')->group(function () {
 
     Route::get('/ads', [AdController::class, 'index']);
 
@@ -13,19 +14,23 @@ Route::prefix('/site')->group(function () {
 
     Route::post('/ads', [AdController::class, 'store']);
 
-    Route::patch('/ads/{ad}', [AdController::class, 'update']);
+    Route::patch('/ads/{ad}', [AdController::class, 'update'])
+        ->name('site.ads.update');
 
     Route::delete('/ads/{ad}', [AdController::class, 'destroy']);
 
-    //    Route::get('/categories', [CategoryController::class, 'index']);
+    // todo :
+    Route::post('/ads/categories/', [AdController::class, 'index'])
+        ->name('site.adsCategory.show');
 
-//    Route::get('/categories/{category}', [CategoryController::class, 'show']);
+    Route::get('/categories', [CategoryController::class, 'index'])
+        ->name('site.categories.index');
 
-
+    Route::get('/categories/{category}/attributes', [CategoryAttributeController::class, 'show'])
+        ->name('site.categories.show');
 
 
 
 });
-
 
 

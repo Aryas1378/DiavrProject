@@ -18,12 +18,15 @@ class AdResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'user_id' => $this->user_id,
             'ad_description' => $this->description,
             'status' => StatusResource::make($this->whenLoaded('status')),
             'status_description' => $this->status_description,
             'category' => CategoryResource::make($this->whenLoaded('category')),
             'attributes' => AttributeResource::collection($this->whenLoaded('attributes')),
             'city' => CityResource::make($this->whenLoaded('city')),
+            'channels' => ChatResource::collection($this->whenLoaded('channels')),
+            'mutualChats' => ChatMutualResource::collection($this->whenLoaded('mutualChats')),
         ];
 
     }

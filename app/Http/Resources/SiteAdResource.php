@@ -18,9 +18,13 @@ class SiteAdResource extends JsonResource
             'title' => $this->title,
             'ad_description' => $this->description,
             'status_description' => $this->status_description,
-            'category' => CategoryResource::make($this->whenLoaded('category')),
-            'attributes' => AdResource::collection($this->whenLoaded('attributes')),
+            'category' => SiteCategoryResource::make($this->whenLoaded('category')),
+            'attributes' => SiteAttributeResource::collection($this->whenLoaded('attributes')),
             'city' => CityResource::make($this->whenLoaded('city')),
+            'pictures' => PictureResource::collection($this->whenLoaded('pictures')),
+            'status' => StatusResource::make($this->whenLoaded('status')),
+            'channels' => ChatResource::collection($this->whenLoaded('channels')),
+
         ];
     }
 }

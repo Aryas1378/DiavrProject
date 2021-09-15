@@ -50,6 +50,10 @@ class Handler extends ExceptionHandler
                 'data' => "id " . json_encode($e->getIds()) . " of " . $e->getModel() . " model not found",
             ], 404);
         }
+
+        return response()->json([
+            'message' => $e->getMessage(),
+        ], 400);
     }
 
     /**

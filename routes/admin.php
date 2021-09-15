@@ -2,11 +2,9 @@
 
 use App\Http\Controllers\Admin\AdController;
 use App\Http\Controllers\Admin\AttributeController;
-use App\Http\Controllers\Admin\AttributeDefaultValuesController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Models\Ad;
 use App\Models\Attribute;
-use App\Models\AttributeDefaultValue;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
@@ -52,25 +50,25 @@ Route::prefix('/admin')->middleware('auth:sanctum')->group(function () {
         ->middleware('can:delete,attribute')
         ->name('admin.attributes.destroy');
 
-    Route::get('attributes/default/values', [AttributeDefaultValuesController::class, 'index'])
-        ->middleware('can:viewAny,' . AttributeDefaultValue::class)
-        ->name('admin.attributeDefaultValues.index');
+//    Route::get('attributes/default/values', [AttributeDefaultValuesController::class, 'index'])
+//        ->middleware('can:viewAny,' . AttributeDefaultValue::class)
+//        ->name('admin.attributeDefaultValues.index');
 
-    Route::get('/attributes/default/values/{attributeDefaultValue}', [AttributeDefaultValuesController::class, 'show'])
-        ->middleware('can:view,attributeDefaultValue')
-        ->name('admin.attributeDefaultValues.show');
+//    Route::get('/attributes/default/values/{attributeDefaultValue}', [AttributeDefaultValuesController::class, 'show'])
+//        ->middleware('can:view,attributeDefaultValue')
+//        ->name('admin.attributeDefaultValues.show');
 
-    Route::post('/attributes/default/values', [AttributeDefaultValuesController::class, 'store'])
-        ->middleware('can:create,'.AttributeDefaultValue::class)
-        ->name('admin.attributeDefaultValues.store');
+//    Route::post('/attributes/default/values', [AttributeDefaultValuesController::class, 'store'])
+//        ->middleware('can:create,'.AttributeDefaultValue::class)
+//        ->name('admin.attributeDefaultValues.store');
 
-    Route::patch('/attributes/default/values/{attributeDefaultValue}', [AttributeDefaultValuesController::class, 'update'])
-        ->middleware('can:update,attributeDefaultValue')
-        ->name('admin.attributeDefaultValues.update');
+//    Route::patch('/attributes/default/values/{attributeDefaultValue}', [AttributeDefaultValuesController::class, 'update'])
+//        ->middleware('can:update,attributeDefaultValue')
+//        ->name('admin.attributeDefaultValues.update');
 
-    Route::delete('/attributes/default/values/{attributeDefaultValue}', [AttributeDefaultValuesController::class, 'destroy'])
-        ->middleware('can:delete,attributeDefaultValue')
-        ->name('admin.attributeDefaultValues.destroy');
+//    Route::delete('/attributes/default/values/{attributeDefaultValue}', [AttributeDefaultValuesController::class, 'destroy'])
+//        ->middleware('can:delete,attributeDefaultValue')
+//        ->name('admin.attributeDefaultValues.destroy');
 
     Route::get('/ads', [AdController::class, 'index'])
         ->middleware('can:viewAny,' . Ad::class)

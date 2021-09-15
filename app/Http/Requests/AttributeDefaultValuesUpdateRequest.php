@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AttributeDefaultValuesStoreRequest extends FormRequest
+class AttributeDefaultValuesUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class AttributeDefaultValuesStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'attribute_id' => ['required'],
-            'values' => ['array'],
-            'values.*' => ['required'],
+
+            'value' => ['required']
         ];
     }
 }

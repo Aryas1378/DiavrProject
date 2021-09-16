@@ -19,7 +19,7 @@ Route::prefix('/site')->middleware('auth:sanctum')->group(function () {
 
     Route::delete('/ads/{ad}', [AdController::class, 'destroy']);
 
-    // todo :
+
     Route::post('/ads/categories/', [AdController::class, 'index'])
         ->name('site.adsCategory.show');
 
@@ -28,8 +28,6 @@ Route::prefix('/site')->middleware('auth:sanctum')->group(function () {
 
     Route::get('/categories/{category}/attributes', [CategoryAttributeController::class, 'show'])
         ->name('site.categories.show');
-
-
 
 });
 

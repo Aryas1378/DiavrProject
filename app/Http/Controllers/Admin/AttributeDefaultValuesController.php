@@ -21,7 +21,9 @@ class AttributeDefaultValuesController extends Controller
 
     public function show(AttributeDefaultValue $attributeDefaultValue)
     {
-        return $attributeDefaultValue; // todo : add resource
+
+        return $this->success(new AttributeDefaultValueResource($attributeDefaultValue));
+
     }
 
     public function store(AttributeDefaultValuesStoreRequest $request)

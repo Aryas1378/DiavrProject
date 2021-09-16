@@ -14,6 +14,9 @@ class AttributeDefaultValueResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'attribute_id' => $this->attrbute_id,
+            'value' => $this->value,
+        ];
     }
 }

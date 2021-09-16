@@ -13,6 +13,11 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('search', SearchController::class);
 
-Route::post('mutual-chat/send-message/ad/{ad}', [MutualChatController::class, 'sendMessage'])->middleware('auth:sanctum');
-Route::get('mutual-chat/ad/{ad}', [MutualChatController::class, 'showMutualChats'])->middleware('auth:sanctum');
-Route::get('ads/mutual-chats', [MutualChatController::class, 'index']);
+Route::post('mutual-chat/send-message/ad/{ad}', [MutualChatController::class, 'sendMessage'])
+    ->middleware('auth:sanctum');
+
+Route::get('mutual-chat/ad/{ad}', [MutualChatController::class, 'showMutualChats'])
+    ->middleware('auth:sanctum');
+
+Route::get('ads/mutual-chats', [MutualChatController::class, 'index'])
+    ->middleware('auth:sanctum');

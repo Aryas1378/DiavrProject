@@ -24,7 +24,6 @@ class SiteAdResource extends JsonResource
             'pictures' => PictureResource::collection($this->whenLoaded('pictures')),
             'status' => StatusResource::make($this->whenLoaded('status')),
             'channels' => ChatResource::collection($this->whenLoaded('channels')),
-
         ];
     }
 }

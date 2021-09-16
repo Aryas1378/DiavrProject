@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Profile;
 
 use App\Http\Requests\ChatMessengerRequest;
 use App\Http\Resources\ChannelResource;
 use App\Models\Ad;
 use App\Models\Channel;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Routing\Controller;
 
 class ChatMessengerController extends Controller
 {
@@ -16,18 +17,16 @@ class ChatMessengerController extends Controller
         $channels = Channel::query()
             ->where('user_id', auth()->id())->orWhereHas('ad', function (Builder $ad) {
                 $ad->where('user_id', auth()->id());
-            })
-            ->with('ad.city', 'ad.category', 'ad.status', 'ad.messages', 'messages')->get();
+            })->with('ad')->get();
 
-        return $this->success($channels);
-//        return $this->success(ChannelResource::collection($channels));
+        return $this->success(ChannelResource::collection($channels));
     }
 
     public function sendMessage(ChatMessengerRequest $request, Ad $ad)
     {
         $channel = $ad->channels()->firstOrCreate([
             'ad_id' => $ad->id,
-            'user_i.d' => auth()->id(),
+            'user_id' => auth()->id(),
         ]);
 
         $channel->messages()->create(['message' => $request->get('message'), 'user_id' => auth()->id()]);

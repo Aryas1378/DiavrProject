@@ -17,17 +17,13 @@ class AdminCategoryController extends Controller
 
     public function index()
     {
-//        $categories = Category::query()->with('parent', 'ad', 'children', 'attributes', 'city')->get();
         $categories = Category::query()->with('children', 'city', 'ads')->get();
-//        $categories = Category::query()->with('ad')->get();
-//        Log::info($categories);
-//        return $this->success(CategoryResource::collection($categories));
+
         return $this->success(CategoryResource::collection($categories));
     }
 
     public function show(Category $category)
     {
-
         return $this->success(
             new CategoryResource($category->load('children', 'parent', 'city', 'attributes'))
         );
@@ -36,8 +32,8 @@ class AdminCategoryController extends Controller
 
     public function store(CategoryStroreRequest $request)
     {
+        $category = Category::query()->create($request->all());
 
-        $category = Category::query()->create($request->only('name', 'parent_id'));
         return $this->success(new CategoryResource($category));
 
     }

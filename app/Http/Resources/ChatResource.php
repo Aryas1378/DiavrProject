@@ -17,7 +17,7 @@ class ChatResource extends JsonResource
         return [
             'ad_id' => $this->ad_id,
             'user_id' => $this->user_id,
-            'messages' => ChannelResource::collection($this->whenLoaded('messages')),
+            'message' => $this->message,
         ];
     }
 }

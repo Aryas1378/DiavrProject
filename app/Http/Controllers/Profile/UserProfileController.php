@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Site;
+namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRegisterRequest;
@@ -17,7 +17,6 @@ class UserProfileController extends Controller
 
     public function update(UserUpdateProfileRequest $request, User $user)
     {
-
         try {
             $user->update($request->only('name', 'email', 'password', 'profile_picture_url'));
             return $user;

@@ -17,9 +17,9 @@ class ChannelResource extends JsonResource
         return [
             'id' => $this->id,
             'ad_id' => $this->ad_id,
-            'user_id' => $this->user_id,
-            'messages' => MessageResource::collection($this->whenLoaded('messages')),
-            'ads' => new AdResource($this->whenLoaded('ad')),
+            'user_id' => $this->ad->owner->name,
+            'ad' => AdResource::make($this->whenLoaded('ad')),
         ];
+
     }
 }

@@ -12,19 +12,19 @@ class AttributeController extends Controller
 {
     public function index()
     {
-        return Attribute::all();
+        return $this->success(AttributeResource::collection(Attribute::all()));
     }
 
     public function show(Attribute $attribute)
     {
         return $this->success(
-            new AttributeResource($attribute->load('categories'))
+            new AttributeResource($attribute->load('categories')) // todo : additional
         );
     }
 
     public function store(AttributeStoreRequest $request)
     {
-        $attribute = Attribute::query()->create($request->only('name'));
+        $attribute = Attribute::query()->create($request->get('name'));
         return $this->success(new AttributeResource($attribute));
     }
 
@@ -37,7 +37,7 @@ class AttributeController extends Controller
             return $this->success(new AttributeResource($attribute));
         }catch (\Throwable $exception){
             DB::rollBack();
-            dd($exception->getMessage());
+            return $this->error($exception->getMessage());
         }
     }
 

@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ChatMessengerController;
-use App\Http\Controllers\Site\AdController;
-use App\Http\Controllers\Site\UserProfileController;
+use App\Http\Controllers\Profile\AdController;
+use App\Http\Controllers\Profile\UserProfileController;
 use App\Http\Controllers\UserAdController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

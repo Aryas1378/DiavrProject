@@ -16,12 +16,12 @@ class AttributeDefaultValuesController extends Controller
 
     public function index()
     {
-        return AttributeDefaultValue::all();
+        return AttributeDefaultValue::all(); // add resource
     }
 
     public function show(AttributeDefaultValue $attributeDefaultValue)
     {
-        return $attributeDefaultValue;
+        return $attributeDefaultValue; // todo : add resource
     }
 
     public function store(AttributeDefaultValuesStoreRequest $request)
@@ -43,19 +43,15 @@ class AttributeDefaultValuesController extends Controller
 
     public function update(AttributeDefaultValuesUpdateRequest $request, AttributeDefaultValue $attributeDefaultValue)
     {
-            $attributeDefaultValue->update($request->only('value'));
-            return $this->success("done");
+        $attributeDefaultValue->update($request->value);
+        return $this->success("done");
     }
 
     public function destroy(AttributeDefaultValue $attributeDefaultValue)
     {
-        DB::beginTransaction();
-        try {
-            $attributeDefaultValue->delete();
-            DB::commit();
-            return $this->success("Done!");
-        } catch (\Throwable $exception) {
-            DB::rollBack();
-        }
+        $attributeDefaultValue->delete();
+
+        return $this->success("Done!");
+
     }
 }

@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Ad extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+
+    const accepted = 2;
+
+
     protected $fillable = [
         'title',
         'description',
@@ -52,6 +55,11 @@ class Ad extends Model
     public function mutualChats()
     {
         return $this->hasMany(MutualChat::class, 'ad_id');
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

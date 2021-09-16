@@ -11,10 +11,6 @@ use Illuminate\Support\Facades\DB;
 class AdController extends Controller
 {
 
-//    public function __construct()
-//    {
-//        $this->middleware('hasPersmmison:createcategory|categoryView')->only('index','show');
-//    }
 
     public function index()
     {

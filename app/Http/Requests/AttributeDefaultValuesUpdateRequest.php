@@ -24,7 +24,6 @@ class AttributeDefaultValuesUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-
             'value' => ['required']
         ];
     }

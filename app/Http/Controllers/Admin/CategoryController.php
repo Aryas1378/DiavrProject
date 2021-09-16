@@ -15,12 +15,8 @@ class CategoryController extends Controller
 
     public function index()
     {
-
-//        \Illuminate\Support\Facades\DB::listen(function (\Illuminate\Database\Events\QueryExecuted $sql) {
-//            dump(vsprintf(str_replace('?', '%s', $sql->sql), $sql->bindings));
-//        });
-
         $categories = Category::query()->with('parent', 'ads', 'children', 'attributes')->get();
+
         return $this->success(CategoryResource::collection($categories));
 
     }
@@ -51,8 +47,7 @@ class CategoryController extends Controller
         } catch (\Throwable $exception) {
 
             DB::rollBack();
-
-            dd($exception->getMessage());
+            return $this->error($exception->getMessage());
         }
     }
 

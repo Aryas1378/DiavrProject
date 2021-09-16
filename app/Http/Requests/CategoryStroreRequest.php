@@ -23,11 +23,9 @@ class CategoryStroreRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
-
             'name' => ['required'],
-
+            'parent_id' => ['nullable', 'exists:categories,id']
         ];
     }
 }

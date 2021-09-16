@@ -26,7 +26,6 @@ class AdResource extends JsonResource
             'attributes' => AttributeResource::collection($this->whenLoaded('attributes')),
             'city' => CityResource::make($this->whenLoaded('city')),
             'channels' => ChatResource::collection($this->whenLoaded('channels')),
-            'mutualChats' => ChatMutualResource::collection($this->whenLoaded('mutualChats')),
         ];
 
     }

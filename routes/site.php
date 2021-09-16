@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Site\AdController;
-use App\Http\Controllers\Site\CategoryAttributeController;
+use App\Http\Controllers\Profile\AdController;
+use App\Http\Controllers\Profile\CategoryAttributeController;
 use Illuminate\Support\Facades\Route;
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AttributeResource;
 use App\Models\Attribute;
 
 class AdminAttributeController extends Controller
@@ -14,6 +15,6 @@ class AdminAttributeController extends Controller
 
     public function show(Attribute $attribute)
     {
-        return $attribute;
+        return $this->success(new AttributeResource($attribute));
     }
 }

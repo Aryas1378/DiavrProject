@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 class AdController extends Controller
 {
 
-
     public function index()
     {
         $categories = Ad::query()
@@ -36,7 +35,7 @@ class AdController extends Controller
         DB::beginTransaction();
         try {
 
-            $ad->update($request->only('status_id'));
+            $ad->update($request->get('status_id'));
             DB::commit();
             return $this->success(new AdResource($ad));
 

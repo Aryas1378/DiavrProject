@@ -18,7 +18,7 @@ class AttributeController extends Controller
     public function show(Attribute $attribute)
     {
         return $this->success(
-            new AttributeResource($attribute->load('categories')) // todo : additional
+            new AttributeResource($attribute)
         );
     }
 
